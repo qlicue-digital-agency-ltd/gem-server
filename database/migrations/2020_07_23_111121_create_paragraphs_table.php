@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikesTable extends Migration
+class CreateParagraphsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateLikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('paragraphs', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->integer('post_id')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->text('body');
+            $table->integer('advert_id');
+            $table->integer('paragraphable_id');
+            $table->string('paragraphable_type');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateLikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('paragraphs');
     }
 }
