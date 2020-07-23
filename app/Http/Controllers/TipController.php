@@ -6,6 +6,7 @@ use App\Tip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\Tip as TipResource;
+use Illuminate\Support\Facades\Storage;
 
 class TipController extends Controller
 {
@@ -42,9 +43,9 @@ class TipController extends Controller
         }
 
         if ($request->hasFile('file')) {
-            $this->path = $request->file('file')->store('tips');
+            $this->path = $request->file('file')->store('public/uploads/tips');
         } else {
-            return response()->json(['message' => 'Please add an Image',  'status' => false], 404);
+            $this->path = null;
         }
 
         $tip = new Tip;
@@ -52,7 +53,7 @@ class TipController extends Controller
         $tip->title = $request->input('title');
         $tip->subtitle = $request->input('subtitle');
         $tip->slug = $request->input('slug');
-        $tip->image = $this->path;
+        $tip->image =  $this->path != null ? 'http://localhost:8000' . Storage::url($this->path) : null;
         $tip->save();
 
         return response()->json(['tip' => $tip]);;

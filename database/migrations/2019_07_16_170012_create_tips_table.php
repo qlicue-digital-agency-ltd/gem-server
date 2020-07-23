@@ -18,7 +18,7 @@ class CreateTipsTable extends Migration
             $table->string('title');
             $table->string('subtitle');
             $table->string('slug');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->softDeletes();
 
             $table->timestamps();

@@ -21,48 +21,165 @@ Route::post('auth/logout', 'AuthController@logout');
 Route::post('auth/refresh/token', 'AuthController@refresh');
 
 
-//Post End Points
-Route::post('posts', ['uses' => 'PostController@getPosts']);
-Route::post('myPosts', ['uses' => 'PostController@getMyPosts']);
-Route::post('post', ['uses' => 'PostController@postPost']);
-Route::get('post/{postId}', ['uses' => 'PostController@getPost']);
-Route::put('post/{postId}', ['uses' => 'PostController@putPost']);
-Route::delete('post/{posttId}', ['uses' => 'PostController@deletePost']);
-Route::post('posts/tourism', ['uses' => 'PostController@getPostsTourism']);
-Route::get('post/img/{posttId}', ['uses' => 'PostController@viewFile']);
+/*****************Tip Routes ******************/
+// List tips
+Route::get('tips', 'TipController@getTips');
+
+// List single tip
+Route::get('tip/{id}', 'TipController@showTip');
+
+// Create new tip
+Route::post('tip', 'TipController@postTip');
+
+// Update tip
+Route::put('tip', 'TipController@putTip');
+
+// Delete tip
+Route::delete('tip/{id}', 'TipController@deleteTip');
 
 
-//Category End Points
-Route::get('categories', ['uses' => 'CategoryController@getCategories']);
-Route::post('category', ['uses' => 'CategoryController@postCategory']);
-Route::get('category/{categoryId}', ['uses' => 'CategoryController@getCategory']);
-Route::put('category/{categoryId}', ['uses' => 'CategoryController@putCategory']);
-Route::delete('category/{categorytId}', ['uses' => 'CategoryController@deleteCategory']);
+/*****************Story Routes ******************/
+// List stories
+Route::get('stories', 'StoryController@getStories');
+
+// List single story
+Route::get('story/{id}', 'StoryController@showStory');
+
+// Create new story
+Route::post('story', 'StoryController@postStory');
+
+// Update story
+Route::put('story', 'StoryController@putStory');
+
+// Delete story
+Route::delete('story/{id}', 'StoryController@deleteStory');
+
+
+/*****************Products Routes ******************/
+// List products
+Route::get('products', 'ProductController@getProducts');
+
+// List single product
+Route::get('product/{id}', 'ProductController@showProduct');
+
+// Create new product
+Route::post('product', 'ProductController@postProduct');
+
+// Update product
+Route::put('product', 'ProductController@putProduct');
+
+// Delete product
+Route::delete('product/{id}', 'ProductController@deleteProduct');
+
+
+/*****************Jobs Routes ******************/
+// List jobs
+Route::get('jobs', 'JobController@getJobs');
+
+// List single job
+Route::get('job/{id}', 'JobController@showJob');
+
+// Create new job
+Route::post('job', 'JobController@postJob');
+
+// Update job
+Route::put('job', 'JobController@putJob');
+
+// Delete job
+Route::delete('job/{id}', 'JobController@deleteJob');
 
 
 
-//Routes of profile
-Route::get('profiles', ['uses' => 'ProfileController@getProfiles']);
-Route::post('profile/{userId}', ['uses' => 'ProfileController@postProfile']);
-Route::get('profile/{profileId}', ['uses' => 'ProfileController@getProfile']);
-Route::post('editProfile/{profileId}', ['uses' => 'ProfileController@putProfile']);
-Route::delete('profile/{profileId}', ['uses' => 'ProfileController@deleteProfile']);
-Route::get('profile/avatar/{profileId}', ['uses' => 'ProfileController@viewProfileImage']);
+/*****************Adverts Routes ******************/
+// List adverts
+Route::get('adverts', 'AdvertController@getAdverts');
+
+// List single advert
+Route::get('advert/{id}', 'AdvertController@showAdvert');
+
+// Create new advert
+Route::post('advert', 'AdvertController@postAdvert');
+
+// Update advert
+Route::put('advert', 'AdvertController@putAdvert');
+
+// Delete advert
+Route::delete('advert/{id}', 'AdvertController@deleteAdvert');
 
 
-//Routes of Roles
-Route::get('roles', ['uses' => 'RoleController@getRoles']);
+/*****************Companies Routes ******************/
+// List companies
+Route::get('companies', 'CompanyController@getCompanies');
+
+// List single company
+Route::get('company/{id}', 'CompanyController@showCompany');
+
+// Create new company
+Route::post('company', 'CompanyController@postCompany');
+
+// Update company
+Route::put('company', 'CompanyController@putCompany');
+
+// Delete company
+Route::delete('company/{id}', 'CompanyController@deleteCompany');
 
 
-//Like end-points
-Route::post('like', ['uses' => 'LikeController@postLike']);
-Route::get('like/{postId}', ['uses' => 'LikeController@getUsersWhoLikedPost']);
-Route::get('like/{postId}/{userId}', ['uses' => 'LikeController@isLikedByMe']);
+
+/*****************Qualifications Routes ******************/
+// List qualifications
+Route::get('qualifications', 'QualificationController@getQualifications');
+
+// List single qualification
+Route::get('qualification/{id}', 'QualificationController@showQualification');
+
+// Create new qualification
+Route::post('qualification', 'QualificationController@postQualification');
+
+// Update qualification
+Route::put('qualification', 'QualificationController@putQualification');
+
+// Delete qualification
+Route::delete('qualification/{id}', 'QualificationController@deleteQualification');
 
 
-//Comment End Points
-Route::get('comments', ['uses' => 'CommentController@getComments']);
-Route::post('comment', ['uses' => 'CommentController@postComment']);
-Route::get('comment/{commentId}', ['uses' => 'CommentController@getComment']);
-Route::put('comment/{commentId}', ['uses' => 'CommentController@putComment']);
-Route::delete('comment/{commenttId}', ['uses' => 'CommentController@deleteComment']);
+/*****************Descriptions Routes ******************/
+// List descriptions
+Route::get('descriptions', 'DescriptionController@getDescriptions');
+
+// List single description
+Route::get('description/{id}', 'DescriptionController@showDescription');
+
+// Create new description
+Route::post('description', 'DescriptionController@postDescription');
+
+// Update description
+Route::put('description', 'DescriptionController@putDescription');
+
+// Delete description
+Route::delete('description/{id}', 'DescriptionController@deleteDescription');
+
+
+Route::post('paragraph/tip/{id}', 'ParagraphController@postTipParagraph');
+Route::post('paragraph/story/{id}', 'ParagraphController@postStoryParagraph');
+
+
+
+/*****************Profile Routes ******************/
+// Profile
+Route::post('profile/{userId}', 'ProfileController@postProfile');
+Route::get('profile/{profileId}', 'ProfileController@viewProfie');
+Route::get('userProfile/{userId}', 'ProfileController@getProfile');
+/*****************Pofessions Routes ******************/
+// Professions
+Route::get('import', 'ProfessionController@import');
+Route::get('professions', 'ProfessionController@getAllProfessions');
+
+
+/*****************Education Routes ******************/
+// Education
+Route::get('educations', 'EducationController@getAllEducation');
+
+
+/*****************Districts Routes ******************/
+// Education
+Route::get('districts', 'DistrictController@getAllDistricts');

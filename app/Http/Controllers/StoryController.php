@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class StoryController extends Controller
@@ -13,7 +14,7 @@ class StoryController extends Controller
         // Get stories
         $stories = Story::all();
 
-        foreach($stories as $story){
+        foreach ($stories as $story) {
             $story->paragraphs;
         }
 
@@ -40,9 +41,9 @@ class StoryController extends Controller
         }
 
         if ($request->hasFile('file')) {
-            $this->path = $request->file('file')->store('stories');
+            $this->path = $request->file('file')->store('public/uploads/stories');
         } else {
-            return response()->json(['message' => 'Please add an Image',  'status' => false], 404);
+            $this->path = null;
         }
 
         $story = new Story;
@@ -50,7 +51,7 @@ class StoryController extends Controller
         $story->title = $request->input('title');
         $story->subtitle = $request->input('subtitle');
         $story->slug = $request->input('slug');
-        $story->image = $this->path;
+        $story->image = $this->path != null ? 'http://localhost:8000' . Storage::url($this->path) : null;
         $story->save();
 
         return response()->json(['story' => $story]);;
