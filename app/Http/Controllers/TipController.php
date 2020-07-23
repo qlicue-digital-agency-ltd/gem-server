@@ -18,6 +18,9 @@ class TipController extends Controller
 
         foreach ($tips as $tip) {
             $tip->paragraphs;
+            foreach ($tip->paragraphs as $paragraph) {
+                $paragraph->advert;
+            }
         }
 
         // Return collection of tips as a resource

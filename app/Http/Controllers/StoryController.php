@@ -16,6 +16,11 @@ class StoryController extends Controller
 
         foreach ($stories as $story) {
             $story->paragraphs;
+            foreach ($story->paragraphs as $paragraph) {
+                $paragraph->advert;
+                
+            }
+
         }
 
         // Return collection of stories as a resource

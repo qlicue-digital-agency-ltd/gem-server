@@ -13,8 +13,8 @@ class Paragraph extends Model
     }
 
 
-    public function adverts()
+    public function advert()
     {
-        return $this->hasOne(Advert::class);
+        return $this->belongsTo(Advert::class, 'advert_id');
     }
 }

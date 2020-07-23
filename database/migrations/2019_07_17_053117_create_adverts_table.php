@@ -18,7 +18,7 @@ class CreateAdvertsTable extends Migration
             $table->string('title');
             $table->string('link')->nullable();
             $table->string('desc')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

@@ -20,7 +20,7 @@ class AuthController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'email' => 'required|email|unique:users',
+                'phone' => 'required|unique:users',
                 'password' => 'required'
             ]
         );
@@ -30,7 +30,7 @@ class AuthController extends Controller
 
 
         $user = User::create([
-            'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 
@@ -49,7 +49,7 @@ class AuthController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'email' => 'required',
+                'phone' => 'required',
                 'password' => 'required'
             ]
         );
@@ -58,7 +58,7 @@ class AuthController extends Controller
             return response()->json(['error', $validator->errors()]);
 
 
-        if (!$token = auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (!$token = auth()->attempt(['phone' => $request->phone, 'password' => $request->password])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

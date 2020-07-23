@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Advert;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdvertController extends Controller
@@ -39,7 +39,7 @@ class AdvertController extends Controller
         if ($request->hasFile('file')) {
             $this->path = $request->file('file')->store('advert');
         } else {
-            return response()->json(['message' => 'Please add an Image',  'status' => false], 404);
+            $this->path = null;
         }
 
         $advert = new Advert;
@@ -47,7 +47,7 @@ class AdvertController extends Controller
         $advert->title = $request->input('title');
         $advert->link = $request->input('link');
         $advert->desc = $request->input('desc');
-        $advert->image = $this->path;
+        $advert->image = $this->path != null ? 'http://localhost:8000' . Storage::url($this->path) : null;
 
         $advert->save();
 
