@@ -12,7 +12,7 @@ class AdvertController extends Controller
     public function getAdverts()
     {
         // Get adverts
-        $adverts = Advert::orderBy('created_at', 'desc')->paginate(10);
+        $adverts = Advert::all();
 
         // Return collection of adverts as a resource
         return response()->json(['adverts' => $adverts]);
@@ -37,7 +37,7 @@ class AdvertController extends Controller
         }
 
         if ($request->hasFile('file')) {
-            $this->path = $request->file('file')->store('advert');
+            $this->path = $request->file('file')->store('public/uploads/adverts');
         } else {
             $this->path = null;
         }
