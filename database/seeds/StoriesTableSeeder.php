@@ -11,6 +11,6 @@ class StoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Story::class, 30)->create();
+      //  factory(App\Story::class, 30)->create();
     }
 }

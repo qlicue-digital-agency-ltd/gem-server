@@ -11,6 +11,6 @@ class QualificationsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Qualification::class, 30)->create();
+      //  factory(App\Qualification::class, 30)->create();
     }
 }

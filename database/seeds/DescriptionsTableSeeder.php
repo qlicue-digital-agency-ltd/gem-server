@@ -11,6 +11,6 @@ class DescriptionsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Description::class, 30)->create();
+      //  factory(App\Description::class, 30)->create();
     }
 }
