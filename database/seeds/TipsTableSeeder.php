@@ -1,5 +1,6 @@
 <?php
 
+use App\Tip;
 use Illuminate\Database\Seeder;
 
 class TipsTableSeeder extends Seeder
@@ -11,6 +12,32 @@ class TipsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Tip::class, 30)->create();
+        Tip::create([
+            'title' => 'title',
+            'slug' => 'slug',
+            'subtitle' => 'subtitle',
+            'image' => 'image',
+        ]);
+
+        Tip::create([
+            'title' => 'title',
+            'slug' => 'slug',
+            'subtitle' => 'subtitle',
+            'image' => 'image',
+        ]);
+
+        Tip::create([
+            'title' => 'title',
+            'slug' => 'slug',
+            'subtitle' => 'subtitle',
+            'image' => 'image',
+        ]);
+
+        Tip::create([
+            'title' => 'title',
+            'slug' => 'slug',
+            'subtitle' => 'subtitle',
+            'image' => 'image',
+        ]);
     }
 }
