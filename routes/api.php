@@ -15,10 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 //user  authentication
-Route::post('auth/register', 'AuthController@register');
+Route::post('auth/signup', 'AuthController@register');
 Route::post('auth/login', 'AuthController@login');
 Route::post('auth/logout', 'AuthController@logout');
 Route::post('auth/refresh/token', 'AuthController@refresh');
+
+
+/*****************User Routes ******************/
+// register User
+Route::post('create', 'UserController@register');
+Route::post('login', 'UserController@login');
+Route::post('follow', 'UserController@followUser');
+Route::post('unfollow', 'UserController@unFollowUser');
+Route::get('users', 'UserController@getAllUsers');
 
 
 /*****************Tip Routes ******************/

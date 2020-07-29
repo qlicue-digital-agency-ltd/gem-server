@@ -34,10 +34,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->roles()->attach(Role::where('name', $request->role)->first());
+       // $user->roles()->attach(Role::where('name', $request->role)->first());
 
         //create user profile......
-        event(new UserRegisteredEvent($request->role, $user));
+        //event(new UserRegisteredEvent($request->role, $user));
 
         $token = auth()->login($user);
 
@@ -75,7 +75,7 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         $user = Auth::user();
-        $user->roles;
+      //  $user->roles;
         $user->profile;
 
         return response()->json([

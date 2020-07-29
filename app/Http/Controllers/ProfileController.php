@@ -10,130 +10,116 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function getProfiles()
-    {
-        $profiles = Profile::all();
-        foreach ($profiles as $profile) {
-            //$profile->guards;
-        }
-        return response()->json(['profiles' => $profiles]);
-    }
-
-    public function getProfile($profileId)
-    {
-        $profile = Profile::find($profileId);
-
-        if (!$profile) return response()->json(['error' => 'Profile Not Found'], 404);
-
-        return response()->json(['profile' => $profile], 200);
-    }
-
-    public function postProfile(Request $request, $branchId)
+    public function getProfile($userId)
     {
 
-        $validator = Validator::make($request->all(), [
-            'fullname' => 'required',
-            'location' => 'required',
-            'phone' => 'required',
-            'gender' => 'required',
-            'user_id' => 'required|unique:profile'
-        ]);
-
-        if ($validator->fails()) {
+        $user = User::find($userId);
+        if (!$user) {
             return response()->json([
-                'error' => $validator->errors(),
-            ], 300);
+                'error' => 'User not found'
+            ], 404);
         }
 
-        $user = User::find($request->user_id);
+        return response()->json([
+            'profile' => $user->profile
+        ], 200,[], JSON_NUMERIC_CHECK);
+    }
 
-        if (!$user) return response()->json(['error' => 'User Not Found'], 404);
+    public function postProfile(Request $request, $userId)
+    {
 
+        $user = User::find($userId);
 
-        $profile = new Profile();
-        $profile->fullname = $request->fullname;
-        $profile->phone = $request->phone;
-        $profile->gender = $request->gender;
-        $profile->location = $request->location;
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
+
 
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->store('file');
-            $profile->avatar = env("APP_URL", "local") . ":8000/api/" . $path;
-        } else {
-            $profile->avatar = 'default.png';
+            $this->path = $request->file('file')->store('stories');
         }
 
-        $user->profiles()->save($profile);
+        $profile = new Profile;
 
-        return response()->json(['profile' => $profile], 201);
+        $profile->avatar = $this->path;
+        $profile->first_name = $request->input('first_name');
+        $profile->last_name = $request->input('last_name');
+        $profile->sex = $request->input('sex');
+        $profile->birthday = $request->input('birthday');
+        $profile->marital_status = $request->input('marital_status');
+        $profile->nationality = $request->input('nationality');
+        $profile->dominion = $request->input('dominion');
+        $profile->education = $request->input('education');
+        $profile->profession = $request->input('profession');
+        $profile->pronvice = $request->input('pronvice');
+        $profile->height = $request->input('height');
+        $profile->skin_color = $request->input('skin_color');
+        $profile->education_id = $request->input('education_id');
+        $profile->profession_id = $request->input('profession_id');
+        $profile->bio = $request->input('bio');
+
+
+        $user->profile()->save($profile);
+
+        return response()->json([
+            'profile' => $profile
+        ], 200,[], JSON_NUMERIC_CHECK);
     }
+
 
     public function putProfile(Request $request, $profileId)
     {
-        $avatar = 'default.png';
-        $validator = Validator::make($request->all(), [
-            'location' => 'required',
-            'fullname' => 'required',
-            'phone' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'error' => $validator->errors(),
-            ], 300);
-        }
 
         $profile = Profile::find($profileId);
-
-        if (!$profile) return response()->json(['error' => 'Profile Not Found'], 404);
-
-        $user = User::find($profile->user_id);
-
-        if (!$user) return response()->json(['error' => 'User Not Found'], 404);
-
-        $destinationPath = storage_path('/app/public/uploads/img');
-        if ($request->hasFile('file')) {
-            $image = $request->file('file');
-            $name = time() . '.png';
-            $image->move($destinationPath, $name);
-            $avatar  = 'http://localhost:8000' . Storage::url('uploads/img/' . $name);
-        }
 
         $profile->update([
-            'fullname' => $request->fullname,
-            'phone' => $request->phone,
-            'location' => $request->location,
-            'gender' => $request->gender,
-            'avatar' => $avatar
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'sex' => $request->input('sex'),
+            'birthday' => $request->input('birthday'),
+            'marital_status' => $request->input('marital_status'),
+            'nationality' => $request->input('nationality'),
+            'education_id' => $request->input('education_id'),
+            'profession_id' => $request->input('profession_id'),
+            'bio' => $request->input('bio'),
         ]);
-
-
-        $user->profile;
-
-        return response()->json(['user' => $user], 201);
+        return response()->json(
+            [
+                'profile' => $profile
+            ], 200,[], JSON_NUMERIC_CHECK
+        );
     }
 
-    public function deleteProfile($profileId)
+    public function viewProfie($profileId)
     {
         $profile = Profile::find($profileId);
-
-        if (!$profile) return response()->json(['error' => 'Profile Not Found'], 404);
-        $profile->delete();
-
-        return response()->json(['profile' => 'Profile deleted successfully'], 201);
-    }
-
-
-    public function viewProfileImage($profileId)
-    {
-        $profile = Profile::withTrashed()->find($profileId);
         if (!$profile) {
             return response()->json(['message' => 'profile not found', 'status' => false], 404);
         }
 
         $pathToFile = storage_path('/app/' . $profile->avatar);
 
+
+
         return response()->download($pathToFile);
+    }
+
+    public function deleteProfile($profileId)
+    {
+
+        // Get Profile
+        $profile = Profile::findOrFail($profileId);
+        if (!$profile) {
+            return response()->json(['message' => 'profile not found', 'status' => false], 404);
+        }
+
+        if ($profile->delete()) {
+            return  response()->json([
+                'message' => 'Profile deleted successfully'
+            ]);
+        }
     }
 }
