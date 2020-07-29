@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
+    public  $path = null;
     public function getProfile($userId)
     {
 
@@ -22,13 +23,16 @@ class ProfileController extends Controller
 
         return response()->json([
             'profile' => $user->profile
-        ], 200,[], JSON_NUMERIC_CHECK);
+        ], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function postProfile(Request $request, $userId)
     {
 
+
+
         $user = User::find($userId);
+
 
         if (!$user) {
             return response()->json([
@@ -39,12 +43,12 @@ class ProfileController extends Controller
 
 
         if ($request->hasFile('file')) {
-            $this->path = $request->file('file')->store('stories');
+            $this->path = $request->file('file')->store('public/uploads/profiles');
         }
 
         $profile = new Profile;
 
-        $profile->avatar = $this->path;
+        $profile->avatar = 'http://localhost:8000' . Storage::url($this->path);
         $profile->first_name = $request->input('first_name');
         $profile->last_name = $request->input('last_name');
         $profile->sex = $request->input('sex');
@@ -66,7 +70,7 @@ class ProfileController extends Controller
 
         return response()->json([
             'profile' => $profile
-        ], 200,[], JSON_NUMERIC_CHECK);
+        ], 200, [], JSON_NUMERIC_CHECK);
     }
 
 
@@ -89,7 +93,10 @@ class ProfileController extends Controller
         return response()->json(
             [
                 'profile' => $profile
-            ], 200,[], JSON_NUMERIC_CHECK
+            ],
+            200,
+            [],
+            JSON_NUMERIC_CHECK
         );
     }
 

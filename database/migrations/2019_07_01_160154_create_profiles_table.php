@@ -27,7 +27,7 @@ class CreateProfilesTable extends Migration
             $table->string('pronvice')->nullable();
             $table->string('dominion')->nullable();
             $table->string('skin_color')->nullable();
-            $table->double('height')->nullable();
+            $table->string('height')->nullable();
             $table->integer('education_id')->nullable();
             $table->integer('profession_id')->nullable();
             $table->string('education')->nullable();
