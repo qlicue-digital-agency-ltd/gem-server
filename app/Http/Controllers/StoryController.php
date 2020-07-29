@@ -59,7 +59,7 @@ class StoryController extends Controller
         $story->image = $this->path != null ? 'http://localhost:8000' . Storage::url($this->path) : null;
         $story->save();
 
-        return response()->json(['story' => $story]);;
+        return response()->json(['story' => $story]);
     }
 
     public function putStory(Request $request)
