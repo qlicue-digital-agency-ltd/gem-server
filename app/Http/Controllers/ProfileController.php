@@ -65,9 +65,16 @@ class ProfileController extends Controller
             'bio' => $request->input('bio'),
         ]);
 
+
+        $user = User::find($profile->user_id);
+
+        $user->profile;
+        $user->followers;
+        $user->followings;
+
         return response()->json([
-            'profile' => $profile
-        ], 200, [], JSON_NUMERIC_CHECK);
+            'user' => $user
+        ], 201, [], JSON_NUMERIC_CHECK);
     }
 
     public function viewProfie($profileId)
