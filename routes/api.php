@@ -175,7 +175,7 @@ Route::post('paragraph/story/{id}', 'ParagraphController@postStoryParagraph');
 
 /*****************Profile Routes ******************/
 // Profile
-Route::post('profile/{userId}', 'ProfileController@postProfile');
+Route::post('editProfile/{profileId}', 'ProfileController@putProfile');
 Route::get('profile/{profileId}', 'ProfileController@viewProfie');
 Route::get('userProfile/{userId}', 'ProfileController@getProfile');
 /*****************Pofessions Routes ******************/
