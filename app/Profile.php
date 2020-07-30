@@ -11,11 +11,21 @@ class Profile extends Model
 
     protected $fillable = [
         'avatar',
-        'gender',
-        'fullname',
-        'phone',
-        'location',
+        'first_name',
+        'last_name',
+        'sex',
+        'birthday',
         'user_id',
+        'marital_status',
+        'nationality', 'dominion',
+        'education',
+        'profession',
+        'pronvice',
+        'height',
+        'skin_color',
+        'education_id',
+        'profession_id',
+        'bio'
     ];
 
     protected $dates = ['deleted_at'];
