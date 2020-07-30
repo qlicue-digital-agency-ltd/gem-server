@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Tip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\Tip as TipResource;
 use Illuminate\Support\Facades\Storage;
 
 class TipController extends Controller
@@ -18,8 +17,10 @@ class TipController extends Controller
 
         foreach ($tips as $tip) {
             $tip->paragraphs;
+            $tip->time = $tip->created_at->diffForHumans();
             foreach ($tip->paragraphs as $paragraph) {
                 $paragraph->advert;
+                $paragraph->time = $paragraph->created_at->diffForHumans();
             }
         }
 

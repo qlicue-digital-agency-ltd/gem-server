@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegisteredEvent;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -33,21 +34,20 @@ class UserController extends Controller
             'phone'    => $request->phone,
             'password' => $request->password,
         ]);
+        
+          //create user profile......
+          event(new UserRegisteredEvent($user));
 
-
-
+ 
         $token = auth()->login($user);
 
+        auth()->user()->profile;
+        auth()->user()->followers;
+        auth()->user()->followings;
 
         return response()->json([
             'token' => $token,
-            'id' => auth()->user()->id,
-            'profile' => auth()->user()->profile,
-            'phone' => auth()->user()->phone,
-            'status' => true,
-            'followers' => auth()->user()->followers,
-            'followings' => auth()->user()->followings,
-
+            'user' => auth()->user()
         ], 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -58,14 +58,13 @@ class UserController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        auth()->user()->profile;
+        auth()->user()->followers;
+        auth()->user()->followings;
 
         return response()->json([
             'token' => $token,
-            'id' => auth()->user()->id,
-            'phone' => auth()->user()->phone,
-            'profile' => auth()->user()->profile,
-            'followers' => auth()->user()->followers,
-            'followings' => auth()->user()->followings,
+            'user' => auth()->user(),
         ], 200, [], JSON_NUMERIC_CHECK);
     }
 

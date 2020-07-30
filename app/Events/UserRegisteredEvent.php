@@ -13,16 +13,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class UserRegisteredEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $role;
     public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($role, $user)
+    public function __construct($user)
     {
-        $this->role = $role;
         $this->user = $user;
     }
 
