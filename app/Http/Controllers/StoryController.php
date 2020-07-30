@@ -16,7 +16,9 @@ class StoryController extends Controller
 
         foreach ($stories as $story) {
             $story->paragraphs;
+            $story->time = $story->created_at->diffForHumans();
             foreach ($story->paragraphs as $paragraph) {
+                $paragraph->time = $paragraph->created_at->diffForHumans();
                 $paragraph->advert;
                 
             }

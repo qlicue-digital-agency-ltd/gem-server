@@ -15,28 +15,28 @@ class StoriesTableSeeder extends Seeder
   {
 
     Story::create([
-      'title' => 'the title',
+      'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
       'subtitle' => 'The subtitle',
       'slug' => 'the slag',
       'image' => 'http://localhost:8000' . Storage::url('public/uploads/stories/default.jpeg')
     ]);
 
     Story::create([
-      'title' => 'the title',
+      'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
       'subtitle' => 'The subtitle',
       'slug' => 'the slag',
       'image' => 'http://localhost:8000' . Storage::url('public/uploads/stories/default.jpeg')
     ]);
 
     Story::create([
-      'title' => 'the title',
+      'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
       'subtitle' => 'The subtitle',
       'slug' => 'the slag',
       'image' => 'http://localhost:8000' . Storage::url('public/uploads/stories/default.jpeg')
     ]);
 
     Story::create([
-      'title' => 'the title',
+      'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
       'subtitle' => 'The subtitle',
       'slug' => 'the slag',
       'image' => 'http://localhost:8000' . Storage::url('public/uploads/stories/default.jpeg')

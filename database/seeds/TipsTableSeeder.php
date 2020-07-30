@@ -2,6 +2,7 @@
 
 use App\Tip;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class TipsTableSeeder extends Seeder
 {
@@ -13,31 +14,31 @@ class TipsTableSeeder extends Seeder
     public function run()
     {
         Tip::create([
-            'title' => 'title',
+            'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
             'slug' => 'slug',
             'subtitle' => 'subtitle',
-            'image' => 'image',
+            'image' => 'http://localhost:8000' . Storage::url('public/uploads/tips/default2.jpg'),
         ]);
 
         Tip::create([
-            'title' => 'title',
+            'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
             'slug' => 'slug',
             'subtitle' => 'subtitle',
-            'image' => 'image',
+            'image' => 'http://localhost:8000' . Storage::url('public/uploads/tips/default.jpg'),
         ]);
 
         Tip::create([
-            'title' => 'title',
+            'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
             'slug' => 'slug',
             'subtitle' => 'subtitle',
-            'image' => 'image',
+            'image' => 'http://localhost:8000' . Storage::url('public/uploads/tips/default2.jpg'),
         ]);
 
         Tip::create([
-            'title' => 'title',
+            'title' => 'Cake carrot cake icing. Soufflé pudding gummi bears bonbon liquorice jelly halvah cake.',
             'slug' => 'slug',
             'subtitle' => 'subtitle',
-            'image' => 'image',
+            'image' => 'http://localhost:8000' . Storage::url('public/uploads/tips/default.jpg'),
         ]);
     }
 }
