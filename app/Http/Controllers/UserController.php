@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\UserRegisteredEvent;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -32,7 +33,7 @@ class UserController extends Controller
 
         $user = User::create([
             'phone'    => $request->phone,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
         ]);
         
           //create user profile......
