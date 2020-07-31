@@ -34,7 +34,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-       // $user->roles()->attach(Role::where('name', $request->role)->first());
+        // $user->roles()->attach(Role::where('name', $request->role)->first());
 
         //create user profile......
         //event(new UserRegisteredEvent($request->role, $user));
@@ -58,7 +58,7 @@ class AuthController extends Controller
             return response()->json(['error', $validator->errors()]);
 
 
-        if (!$token = auth()->attempt(['phone' => $request->phone, 'password' => $request->password])) {
+        if (!$token = auth()->attempt(['phone' => $request->phone, 'password' => Hash::make($request->password)])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -75,7 +75,7 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         $user = Auth::user();
-      //  $user->roles;
+        //  $user->roles;
         $user->profile;
 
         return response()->json([
