@@ -58,7 +58,7 @@ class AuthController extends Controller
             return response()->json(['error', $validator->errors()]);
 
 
-        if (!$token = auth()->attempt(['phone' => $request->phone, 'password' => Hash::make($request->password)])) {
+        if (!$token = auth()->attempt(['phone' => $request->phone, 'password' => $request->password])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
